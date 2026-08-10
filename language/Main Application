@@ -1,0 +1,82 @@
+import streamlit as st
+from translator import translate_text, SUPPORTED_LANGUAGES
+
+
+st.set_page_config(
+    page_title="AI Language Translation System",
+    page_icon="🌍",
+    layout="centered"
+)
+
+
+st.title("🌍 AI Language Translation System")
+
+st.write(
+    "Translate text between multiple languages using "
+    "an AI-powered translation system."
+)
+
+
+languages = list(SUPPORTED_LANGUAGES.keys())
+
+
+col1, col2 = st.columns(2)
+
+
+with col1:
+    source_language = st.selectbox(
+        "Source Language",
+        languages,
+        index=0
+    )
+
+
+with col2:
+    target_language = st.selectbox(
+        "Target Language",
+        languages,
+        index=1
+    )
+
+
+text = st.text_area(
+    "Enter text to translate",
+    placeholder="Type your sentence here...",
+    height=150
+)
+
+
+if st.button("🔄 Translate", use_container_width=True):
+
+    if not text.strip():
+
+        st.warning("Please enter text before translating.")
+
+    else:
+
+        with st.spinner("Translating..."):
+
+            result = translate_text(
+                text,
+                source_language,
+                target_language
+            )
+
+        st.subheader("Translation Result")
+
+        st.success(result)
+
+
+st.divider()
+
+st.subheader("Example")
+
+st.write(
+    "English → Hindi: "
+    "**Good morning, how are you?**"
+)
+
+st.write(
+    "English → Telugu: "
+    "**శుభోదయం, మీరు ఎలా ఉన్నారు?**"
+)

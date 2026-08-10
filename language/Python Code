@@ -1,0 +1,55 @@
+from deep_translator import GoogleTranslator
+
+
+SUPPORTED_LANGUAGES = {
+    "English": "en",
+    "Hindi": "hi",
+    "Telugu": "te",
+    "Tamil": "ta",
+    "Kannada": "kn",
+    "Malayalam": "ml",
+    "French": "fr",
+    "German": "de",
+    "Spanish": "es",
+    "Italian": "it",
+    "Portuguese": "pt",
+    "Russian": "ru",
+    "Japanese": "ja",
+    "Korean": "ko",
+    "Chinese": "zh-CN",
+    "Arabic": "ar"
+}
+
+
+def translate_text(text, source_language, target_language):
+    """
+    Translate text from source language to target language.
+    """
+
+    if not text.strip():
+        return "Please enter some text."
+
+    if source_language not in SUPPORTED_LANGUAGES:
+        return "Unsupported source language."
+
+    if target_language not in SUPPORTED_LANGUAGES:
+        return "Unsupported target language."
+
+    if source_language == target_language:
+        return text
+
+    source_code = SUPPORTED_LANGUAGES[source_language]
+    target_code = SUPPORTED_LANGUAGES[target_language]
+
+    try:
+        translator = GoogleTranslator(
+            source=source_code,
+            target=target_code
+        )
+
+        result = translator.translate(text)
+
+        return result
+
+    except Exception as error:
+        return f"Translation failed: {error}"

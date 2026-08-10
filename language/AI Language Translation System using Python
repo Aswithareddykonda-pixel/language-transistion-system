@@ -1,0 +1,8 @@
+Project Objective
+
+The system translates text from one language to another using an AI/NLP translation model. A user enters text, selects the source and target languages, and the system generates the translated text.
+
+Example:
+
+English: Good morning, how are you?
+Hindi: सुप्रभात, आप कैसे हैं?
